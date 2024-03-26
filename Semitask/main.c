@@ -3,7 +3,6 @@
 #include <math.h>
 #include <time.h>
 
-// Ellenőrzi, hogy egy szám prímszám-e
 bool is_prime(int number) {
     if (number <= 1) {
         return false;
@@ -22,7 +21,6 @@ bool is_prime(int number) {
     return true;
 }
 
-// Megkeresi az adott számhoz legközelebbi prímszámot
 int find_nearest_prime(int number) {
     if (is_prime(number)) {
         return number;
@@ -46,18 +44,16 @@ int main() {
     const int SIZE = 100000;
     int primes[SIZE];
     
-    clock_t start_time = clock(); // Mérjük az időt előtte
+    clock_t start_time = clock();
     
     for (int i = 1; i <= SIZE; ++i) {
         primes[i - 1] = find_nearest_prime(i);
     }
     
-    clock_t end_time = clock(); // Mérjük az időt utána
+    clock_t end_time = clock(); 
     
-    double elapsed_time = (double)(end_time - start_time) / CLOCKS_PER_SEC; // Számítsuk ki a teljes időt másodpercekben
+    double elapsed_time = (double)(end_time - start_time) / CLOCKS_PER_SEC; 
     
-    // Kiírjuk az első 10 prímszámot a tömbből
-    //printf("Az elso 10 primszam a tombben:\n");
     for (int i = 0; i < 10; ++i) {
         //printf("%d ", primes[i]);
     }
