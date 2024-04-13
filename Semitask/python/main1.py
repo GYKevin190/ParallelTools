@@ -1,5 +1,6 @@
 import numpy as np
 import time
+import matplotlib.pyplot as plt
 
 def prime_factors_sequential(input_array):
     n = len(input_array)
@@ -17,18 +18,29 @@ def prime_factors_sequential(input_array):
     return factors
 
 def main():
-    input_array = np.random.randint(1024, 1025, size=10).astype(np.int32)
-    print(input_array)
+    step = 100000
+    max_size = 250000
+
+    sizes = range(50000, max_size + 1, step)
+    times = []
+
+    for size in sizes:
+        input_array = np.random.randint(1, 1025, size=size).astype(np.int32)
+        print("Calculating for size:", size)
+        
+        start_time = time.time()
+        prime_factors_sequential(input_array)
+        end_time = time.time()
+
+        elapsed_time = end_time - start_time
+        times.append(elapsed_time)
+        print("Elapsed time (ms):", elapsed_time * 1000)
     
-    sum =0
-    start_time = time.time()
-    factors = prime_factors_sequential(input_array)
-    end_time = time.time()
-
-    print(factors)
-
-    elapsed_time = end_time - start_time
-    print("Elapsed time (ms):", elapsed_time * 1000)
+    plt.plot(sizes, times)
+    plt.xlabel('Array Size')
+    plt.ylabel('Time (s)')
+    plt.title('Execution Time vs. Array Size')
+    plt.show()
 
 if __name__ == "__main__":
     main()
